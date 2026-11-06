@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Навчальна HTML/CSS картка профілю">
+  <title>Картка профілю — Ярослав</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page">
+    <article class="profile-card" aria-labelledby="profile-name">
+      <div class="avatar" role="img" aria-label="Аватар користувача — літера Я">
+        <span aria-hidden="true">Я</span>
+      </div>
+
+      <p class="eyebrow">МІЙ ПРОФІЛЬ</p>
+      <h1 id="profile-name">Ярослав</h1>
+      <p class="profession">Лікар • HealthTech-ентузіаст</p>
+
+      <p class="description">
+        Поєдную медицину з технологіями. Вивчаю HTML і CSS,
+        створюю корисні цифрові інструменти та розвиваю
+        проєкт «Асистент лікаря».
+      </p>
+
+      <a class="contact-button"
+         href="https://github.com/parashchuk23-oss"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="Зв'язатися через профіль GitHub">
+        Зв'язатися
+      </a>
+
+      <p class="contact-hint">Кнопка відкриває мій профіль GitHub</p>
+    </article>
+  </main>
+</body>
+</html>
