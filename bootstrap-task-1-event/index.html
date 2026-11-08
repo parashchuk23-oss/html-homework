@@ -7,7 +7,7 @@
   <title>AI & HealthTech Meetup — Реєстрація</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
-  <script src="script.js" defer></script>
+  <script src="script.js?v=3" defer></script>
 </head>
 <body>
   <header class="site-header py-3">
@@ -85,7 +85,7 @@
           <div class="col-lg-5">
             <span class="eyebrow d-inline-block mb-3">КАЛЬКУЛЯТОР КВИТКІВ</span>
             <h2 class="fw-bold mb-3" id="ticket-title">Розрахуй вартість участі</h2>
-            <p class="text-secondary">Один квиток коштує <strong>400 грн</strong>. Для компанії від трьох осіб діють знижки.</p>
+            <p class="text-secondary">Обери категорію квитків: <strong>Standard — 400 грн</strong> або <strong>VIP — 800 грн</strong>. Для груп від трьох учасників діють знижки.</p>
             <div class="discount-guide">
               <div><span>1–2 квитки</span><strong>без знижки</strong></div>
               <div><span>3–4 квитки</span><strong>−10%</strong></div>
@@ -98,15 +98,30 @@
               <h3 class="h5 fw-bold mb-3">Калькулятор вартості</h3>
               <form id="ticket-form" novalidate>
                 <div class="mb-3">
+                  <label class="form-label fw-semibold" for="ticket-category">Категорія квитка</label>
+                  <select id="ticket-category" name="category" class="form-select form-select-lg" required>
+                    <option value="standard">Standard — 400 грн</option>
+                    <option value="vip">VIP — 800 грн</option>
+                  </select>
+                </div>
+                <div class="mb-3">
                   <label class="form-label fw-semibold" for="tickets-count">Кількість квитків</label>
                   <input class="form-control form-control-lg" type="number" id="tickets-count" name="tickets" min="1" step="1" value="2" inputmode="numeric" required aria-describedby="ticket-error">
                   <div id="ticket-error" class="invalid-feedback">Вкажіть цілу кількість квитків, більшу за нуль.</div>
                 </div>
+                <div class="mb-4">
+                  <label class="form-label fw-semibold" for="ticket-promo">Промокод (необов'язково)</label>
+                  <input class="form-control form-control-lg" type="text" id="ticket-promo" name="promo" autocomplete="off" placeholder="Наприклад, EVENT50" aria-describedby="promo-hint">
+                  <div class="form-text" id="promo-hint">EVENT50 дає додаткову знижку 50 грн після відсоткової знижки.</div>
+                </div>
                 <button class="btn btn-main btn-lg w-100" type="submit">Розрахувати</button>
               </form>
               <div id="ticket-result" class="ticket-result mt-4 d-none" role="status" aria-live="polite">
+                <div class="result-line"><span>Категорія</span><strong id="ticket-category-label"></strong></div>
+                <div class="result-line"><span>Квитків × ціна за один</span><strong id="ticket-unit-price"></strong></div>
                 <div class="result-line"><span>Початкова вартість</span><strong id="ticket-original"></strong></div>
-                <div class="result-line"><span>Знижка (<span id="ticket-rate"></span>%)</span><strong id="ticket-discount"></strong></div>
+                <div class="result-line"><span>Знижка за кількість (<span id="ticket-rate"></span>%)</span><strong id="ticket-discount"></strong></div>
+                <div class="result-line"><span>Промокод <span id="ticket-promo-label"></span></span><strong id="ticket-promo-discount"></strong></div>
                 <div class="result-total"><span>До сплати</span><strong id="ticket-total"></strong></div>
               </div>
               <div id="ticket-message" class="alert alert-danger mt-3 mb-0 d-none" role="alert"></div>
