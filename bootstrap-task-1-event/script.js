@@ -55,39 +55,25 @@ form.addEventListener("submit", (event) => {
 });
 
 
-// Завдання 2. Калькулятор вартості квитків
+// Завдання 2 + 3. Калькулятор з категоріями та промокодом
 const ticketForm = document.getElementById("ticket-form");
 const ticketCountInput = document.getElementById("tickets-count");
+const ticketCategoryInput = document.getElementById("ticket-category");
+const ticketPromoInput = document.getElementById("ticket-promo");
 const ticketResult = document.getElementById("ticket-result");
 const ticketMessage = document.getElementById("ticket-message");
 
-const ticketPrice = 400; // вартість одного квитка, грн
+const ticketPrices = { standard: 400, vip: 800 };
+const promoCode = "EVENT50";
+const promoValue = 50;
 
-ticketForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const quantity = Number(ticketCountInput.value);
-  const validQuantity =
-    ticketCountInput.value.trim() !== "" &&
-    Number.isInteger(quantity) &&
-    quantity > 0;
-
-  ticketCountInput.classList.toggle("is-invalid", !validQuantity);
-  ticketCountInput.setAttribute("aria-invalid", String(!validQuantity));
-
-  if (!validQuantity) {
-    ticketResult.classList.add("d-none");
-    ticketMessage.textContent = "Помилка: введіть цілу кількість квитків, більшу за нуль.";
-    ticketMessage.classList.remove("d-none");
-    ticketCountInput.focus();
-    return;
+function calculateTicketOrder(quantity, category, promo) {
+  const ticketPrice = ticketPrices[category];
+  if (!Number.isSafeInteger(quantity) || quantity <= 0 || ticketPrice === undefined) {
+    return null;
   }
 
-  ticketMessage.classList.add("d-none");
-
-  // let — змінна, її значення залежить від кількості квитків
   let discountPercent = 0;
-
   if (quantity >= 5) {
     discountPercent = 20;
   } else if (quantity >= 3) {
@@ -96,21 +82,76 @@ ticketForm.addEventListener("submit", (event) => {
     discountPercent = 0;
   }
 
-  // const — результати одного конкретного розрахунку
   const originalPrice = ticketPrice * quantity;
-  const discountAmount = originalPrice * discountPercent / 100;
-  const finalPrice = originalPrice - discountAmount;
+  const quantityDiscount = originalPrice * discountPercent / 100;
+  const afterQuantityDiscount = originalPrice - quantityDiscount;
+  const promoApplied = promo.trim().toUpperCase() === promoCode;
+  const promoDiscount = promoApplied ? Math.min(promoValue, afterQuantityDiscount) : 0;
+  const finalPrice = Math.max(0, afterQuantityDiscount - promoDiscount);
 
-  document.getElementById("ticket-original").textContent = originalPrice + " грн";
-  document.getElementById("ticket-rate").textContent = String(discountPercent);
-  document.getElementById("ticket-discount").textContent = "−" + discountAmount + " грн";
-  document.getElementById("ticket-total").textContent = finalPrice + " грн";
-  ticketResult.classList.remove("d-none");
-});
+  return {
+    quantity, category, ticketPrice, discountPercent, originalPrice,
+    quantityDiscount, promoDiscount, promoApplied, finalPrice
+  };
+}
 
-ticketCountInput.addEventListener("input", () => {
+function clearTicketResult() {
   ticketCountInput.classList.remove("is-invalid");
   ticketCountInput.removeAttribute("aria-invalid");
-  ticketMessage.classList.add("d-none");
   ticketResult.classList.add("d-none");
+  ticketMessage.classList.add("d-none");
+}
+
+[ticketCountInput, ticketCategoryInput, ticketPromoInput].forEach((input) => {
+  input.addEventListener("input", clearTicketResult);
+  input.addEventListener("change", clearTicketResult);
+});
+
+ticketForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const quantity = Number(ticketCountInput.value);
+  const category = ticketCategoryInput.value;
+  const promo = ticketPromoInput.value;
+  const validQuantity =
+    ticketCountInput.value.trim() !== "" &&
+    Number.isSafeInteger(quantity) &&
+    quantity > 0;
+  const validCategory = Object.hasOwn(ticketPrices, category);
+
+  ticketCountInput.classList.toggle("is-invalid", !validQuantity);
+  ticketCountInput.setAttribute("aria-invalid", String(!validQuantity));
+  ticketCategoryInput.classList.toggle("is-invalid", !validCategory);
+
+  if (!validQuantity || !validCategory) {
+    ticketResult.classList.add("d-none");
+    ticketMessage.textContent = "Помилка: виберіть категорію та введіть цілу кількість квитків, більшу за нуль.";
+    ticketMessage.classList.remove("d-none");
+    (validCategory ? ticketCountInput : ticketCategoryInput).focus();
+    return;
+  }
+
+  const order = calculateTicketOrder(quantity, category, promo);
+  if (order === null) return;
+
+  ticketMessage.classList.add("d-none");
+  const currency = (value) => value.toLocaleString("uk-UA") + " грн";
+
+  document.getElementById("ticket-category-label").textContent =
+    category === "vip" ? "VIP" : "Standard";
+  document.getElementById("ticket-unit-price").textContent =
+    quantity + " × " + currency(order.ticketPrice);
+  document.getElementById("ticket-original").textContent =
+    currency(order.originalPrice);
+  document.getElementById("ticket-rate").textContent =
+    String(order.discountPercent);
+  document.getElementById("ticket-discount").textContent =
+    "−" + currency(order.quantityDiscount);
+  document.getElementById("ticket-promo-label").textContent =
+    order.promoApplied ? "(EVENT50)" : "(не застосовано)";
+  document.getElementById("ticket-promo-discount").textContent =
+    "−" + currency(order.promoDiscount);
+  document.getElementById("ticket-total").textContent =
+    currency(order.finalPrice);
+  ticketResult.classList.remove("d-none");
 });
