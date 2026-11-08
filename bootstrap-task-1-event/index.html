@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Навчальна сторінка реєстрації на AI & HealthTech Meetup з перевіркою форми на JavaScript.">
+  <title>AI & HealthTech Meetup — Реєстрація</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header py-3">
+    <div class="container d-flex justify-content-between align-items-center gap-3">
+      <a class="brand text-decoration-none fw-bold" href="#home">NOVA<span>LAB</span><span class="brand-dot">.</span></a>
+      <a class="small nav-link fw-semibold" href="#register">Реєстрація <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero py-5 py-lg-6" aria-labelledby="event-title">
+      <div class="container">
+        <div class="row g-5 align-items-center">
+          <div class="col-lg-7">
+            <span class="eyebrow d-inline-block mb-3">ОНЛАЙН-ПОДІЯ • НАВЧАЛЬНИЙ ПРОЄКТ</span>
+            <h1 id="event-title" class="display-4 fw-bold mb-3">AI <span class="accent">&</span> HealthTech<br>Meetup 2027</h1>
+            <p class="lead hero-lead mb-4">Дізнайся, як штучний інтелект змінює медицину, дослідження та роботу сучасного лікаря. Від практичних агентів до майбутнього HealthTech.</p>
+            <div class="event-details d-flex flex-column gap-3 mb-4">
+              <div class="d-flex align-items-start gap-3"><span class="detail-icon" aria-hidden="true">◷</span><div><strong>20 березня 2027 року</strong><span class="d-block detail-secondary">11:00–14:00, за Києвом</span></div></div>
+              <div class="d-flex align-items-start gap-3"><span class="detail-icon" aria-hidden="true">⌁</span><div><strong>Онлайн-зустріч</strong><span class="d-block detail-secondary">Демонстраційна подія • без фактичного посилання на трансляцію</span></div></div>
+            </div>
+            <a href="#register" class="btn btn-main btn-lg px-4">Зареєструватися <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="col-lg-5">
+            <div class="visual-card" aria-hidden="true">
+              <div class="visual-top"><span class="visual-circle"></span><span class="visual-circle"></span><span class="visual-circle"></span><span class="ms-auto visual-label">NEXT / 2027</span></div>
+              <div class="visual-center"><div class="orb orb-a"></div><div class="orb orb-b"></div><span class="visual-ai">AI</span><div class="visual-subtitle">IDEAS THAT<br>MOVE MEDICINE</div></div>
+              <div class="visual-bottom"><span>RESEARCH</span><span>TECHNOLOGY</span><span>CARE</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section py-5" id="register" aria-labelledby="form-title">
+      <div class="container">
+        <div class="row g-4 align-items-start justify-content-between">
+          <div class="col-lg-5">
+            <span class="eyebrow mb-3 d-inline-block">ПРИЄДНУЙСЯ ДО ЗУСТРІЧІ</span>
+            <h2 class="fw-bold mb-3" id="form-title">Зареєструй свою участь</h2>
+            <p class="text-secondary">Заповни три поля. JavaScript перевірить дані й покаже повідомлення про результат.</p>
+            <div class="info-note mt-4"><strong>Для навчання:</strong> реєстрація демонстраційна. Дані не надсилаються на сервер і не зберігаються.</div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-card">
+              <h3 class="h5 fw-bold mb-1">Форма учасника</h3>
+              <p class="small text-secondary mb-4">Усі поля обов'язкові</p>
+              <form id="registration-form" novalidate>
+                <div class="mb-3">
+                  <label for="full-name" class="form-label fw-semibold">Ім'я</label>
+                  <input class="form-control form-control-lg" id="full-name" name="name" type="text" autocomplete="name" placeholder="Ваше ім'я" required aria-describedby="name-error">
+                  <div id="name-error" class="invalid-feedback">Введіть ім'я.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label fw-semibold">Email</label>
+                  <input class="form-control form-control-lg" id="email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required aria-describedby="email-error">
+                  <div id="email-error" class="invalid-feedback">Введіть коректну електронну адресу.</div>
+                </div>
+                <div class="mb-4">
+                  <label for="participants" class="form-label fw-semibold">Кількість учасників</label>
+                  <input class="form-control form-control-lg" id="participants" name="participants" type="number" min="1" step="1" placeholder="1" required aria-describedby="participants-error">
+                  <div id="participants-error" class="invalid-feedback">Вкажіть ціле число більше нуля.</div>
+                </div>
+                <button class="btn btn-main btn-lg w-100" type="submit">Зареєструватися</button>
+              </form>
+              <div id="form-message" class="alert mt-3 mb-0 d-none" role="status" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="py-4"><div class="container d-flex flex-column flex-sm-row justify-content-between gap-2"><span>© 2027 NOVALAB — навчальний макет</span><span>HTML5 · Bootstrap 5 · JavaScript</span></div></footer>
+</body>
+</html>
