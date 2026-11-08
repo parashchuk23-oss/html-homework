@@ -79,6 +79,42 @@
         </div>
       </div>
     </section>
+    <section class="ticket-section py-5" id="tickets" aria-labelledby="ticket-title">
+      <div class="container">
+        <div class="row g-4 align-items-center justify-content-between">
+          <div class="col-lg-5">
+            <span class="eyebrow d-inline-block mb-3">КАЛЬКУЛЯТОР КВИТКІВ</span>
+            <h2 class="fw-bold mb-3" id="ticket-title">Розрахуй вартість участі</h2>
+            <p class="text-secondary">Один квиток коштує <strong>400 грн</strong>. Для компанії від трьох осіб діють знижки.</p>
+            <div class="discount-guide">
+              <div><span>1–2 квитки</span><strong>без знижки</strong></div>
+              <div><span>3–4 квитки</span><strong>−10%</strong></div>
+              <div><span>5 і більше</span><strong>−20%</strong></div>
+            </div>
+            <p class="small text-secondary mt-3 mb-0">Це навчальний калькулятор. Оплата квитків не здійснюється.</p>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-card">
+              <h3 class="h5 fw-bold mb-3">Калькулятор вартості</h3>
+              <form id="ticket-form" novalidate>
+                <div class="mb-3">
+                  <label class="form-label fw-semibold" for="tickets-count">Кількість квитків</label>
+                  <input class="form-control form-control-lg" type="number" id="tickets-count" name="tickets" min="1" step="1" value="2" inputmode="numeric" required aria-describedby="ticket-error">
+                  <div id="ticket-error" class="invalid-feedback">Вкажіть цілу кількість квитків, більшу за нуль.</div>
+                </div>
+                <button class="btn btn-main btn-lg w-100" type="submit">Розрахувати</button>
+              </form>
+              <div id="ticket-result" class="ticket-result mt-4 d-none" role="status" aria-live="polite">
+                <div class="result-line"><span>Початкова вартість</span><strong id="ticket-original"></strong></div>
+                <div class="result-line"><span>Знижка (<span id="ticket-rate"></span>%)</span><strong id="ticket-discount"></strong></div>
+                <div class="result-total"><span>До сплати</span><strong id="ticket-total"></strong></div>
+              </div>
+              <div id="ticket-message" class="alert alert-danger mt-3 mb-0 d-none" role="alert"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
   <footer class="py-4"><div class="container d-flex flex-column flex-sm-row justify-content-between gap-2"><span>© 2027 NOVALAB — навчальний макет</span><span>HTML5 · Bootstrap 5 · JavaScript</span></div></footer>
 </body>
