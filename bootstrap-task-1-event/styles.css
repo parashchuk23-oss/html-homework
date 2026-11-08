@@ -8,3 +8,16 @@
 footer{background:#eaf1f4;color:#5e7384;font-size:13px}
 @media(max-width:575.98px){.hero h1{letter-spacing:-1.4px}.visual-card{height:275px}.visual-ai{font-size:92px}.form-card{padding:22px}.hero{padding-top:30px!important}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Завдання 2: блок калькулятора квитків */
+.ticket-section{background:#eef6f4;border-top:1px solid #d5e9e5}
+.discount-guide{max-width:440px;background:#fff;border:1px solid #dcebe7;border-radius:16px;padding:8px 20px}
+.discount-guide div{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0}
+.discount-guide div+div{border-top:1px solid #e6efed}
+.discount-guide span{color:#4e6971}.discount-guide strong{color:#107a6e}
+.ticket-result{border:1px solid #bde6d6;background:#edf9f3;border-radius:14px;padding:17px 20px}
+.result-line{display:flex;justify-content:space-between;gap:12px;padding:8px 0;color:#4e6573;font-size:15px}
+.result-line strong{color:#183849}
+.result-total{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid #b9e4d5;padding-top:15px;margin-top:8px;font-weight:700}
+.result-total strong{font-size:26px;color:#087b68}
+@media(max-width:575.98px){.discount-guide{padding-inline:14px}.result-total strong{font-size:23px}}
