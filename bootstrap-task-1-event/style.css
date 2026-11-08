@@ -1,0 +1,23 @@
+:root{--ink:#10243e;--slate:#657489;--accent:#17b4b0;--deep:#0d2544;--border:#dfe8ee}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{background:#f6f9fb;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.site-header{background:#fff;border-bottom:1px solid var(--border)}.brand{font-size:24px;letter-spacing:-1px;color:var(--deep)}.brand span:first-child{color:#0b9c98}.brand-dot{color:#fd9e6f}.nav-link{color:#25566a}.nav-link:hover{color:#0b9c98}
+.hero{background:linear-gradient(122deg,#102946,#0b203a 70%,#12394c);color:#fff;overflow:hidden}.hero h1{letter-spacing:-2px;line-height:1.08}.accent{color:#4ad9c5}.eyebrow{font-size:12px;font-weight:800;letter-spacing:2px;color:#27bcb3}.hero-lead{color:#d6e4ed;max-width:620px}.detail-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:#ffffff16;color:#4ad9c5;font-size:24px;flex-shrink:0}.detail-secondary{font-size:13px;color:#adc3d2}
+.btn-main{background:#17b4a6;color:#082f33;border:2px solid #17b4a6;font-weight:750;border-radius:12px}.btn-main:hover,.btn-main:focus-visible{background:#51d8c8;border-color:#51d8c8;color:#092d32}
+.visual-card{height:370px;background:#102f4c;border:1px solid #587c8a70;border-radius:22px;box-shadow:0 30px 80px #0003;overflow:hidden;display:flex;flex-direction:column;position:relative}.visual-top{height:52px;border-bottom:1px solid #ffffff24;display:flex;align-items:center;gap:7px;padding:0 22px}.visual-circle{width:8px;height:8px;border-radius:50%;background:#5d9caa}.visual-label{font-size:11px;letter-spacing:2px;color:#9ebfc9}.visual-center{flex:1;display:grid;place-items:center;position:relative;isolation:isolate}.orb{position:absolute;border-radius:50%;z-index:-1}.orb-a{height:190px;width:190px;background:#11a69c99;filter:blur(27px);transform:translate(-50px,-10px)}.orb-b{height:160px;width:160px;background:#3a75b79c;filter:blur(29px);transform:translate(70px,35px)}.visual-ai{font-size:116px;line-height:1;font-weight:900;letter-spacing:-13px;color:white;text-shadow:0 10px 40px #0a2028aa}.visual-subtitle{position:absolute;right:22px;bottom:18px;font-size:10px;line-height:1.5;letter-spacing:1.4px;font-weight:800;color:#c4f1ee;text-align:right}.visual-bottom{padding:18px 22px;display:flex;justify-content:space-between;border-top:1px solid #ffffff24;color:#9db9c6;font-size:10px;font-weight:700;letter-spacing:1px}
+.form-section{background:#f6f9fb}.form-section h2{font-size:clamp(28px,3.5vw,40px);letter-spacing:-1px}.info-note{padding:18px 20px;background:#e5f4f1;border-left:4px solid #17b4a6;border-radius:10px;color:#335a60;font-size:14px;line-height:1.6}.form-card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:32px;box-shadow:0 20px 60px #2440540b}.form-control{border-radius:11px;border-color:#cddae4;font-size:16px}.form-control:focus{border-color:#17b4a6;box-shadow:0 0 0 4px #17b4a622}.form-label{font-size:14px}.alert{border-radius:12px}
+footer{background:#eaf1f4;color:#5e7384;font-size:13px}
+@media(max-width:575.98px){.hero h1{letter-spacing:-1.4px}.visual-card{height:275px}.visual-ai{font-size:92px}.form-card{padding:22px}.hero{padding-top:30px!important}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Завдання 2: блок калькулятора квитків */
+.ticket-section{background:#eef6f4;border-top:1px solid #d5e9e5}
+.discount-guide{max-width:440px;background:#fff;border:1px solid #dcebe7;border-radius:16px;padding:8px 20px}
+.discount-guide div{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0}
+.discount-guide div+div{border-top:1px solid #e6efed}
+.discount-guide span{color:#4e6971}.discount-guide strong{color:#107a6e}
+.ticket-result{border:1px solid #bde6d6;background:#edf9f3;border-radius:14px;padding:17px 20px}
+.result-line{display:flex;justify-content:space-between;gap:12px;padding:8px 0;color:#4e6573;font-size:15px}
+.result-line strong{color:#183849}
+.result-total{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid #b9e4d5;padding-top:15px;margin-top:8px;font-weight:700}
+.result-total strong{font-size:26px;color:#087b68}
+@media(max-width:575.98px){.discount-guide{padding-inline:14px}.result-total strong{font-size:23px}}
