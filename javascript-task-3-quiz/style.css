@@ -35,3 +35,10 @@ body { background: #f4f8fa; color: var(--dark); font-family: system-ui, -apple-s
   .topbar-label { font-size: 9px; }
 }
 @media (prefers-reduced-motion: reduce) { .progress-bar, .answer-button { transition: none; } }
+
+/* Таблиця підсумків одного проходження */
+.result-table { text-align: left; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.result-table thead th { background: #e9f7f4; color: #155b55; font-size: 13px; }
+.result-table th, .result-table td { padding: 13px 16px; }
+.result-table tbody th { font-weight: 600; color: #476071; }
+.result-table tbody td { font-weight: 750; color: var(--dark); text-align: right; }
