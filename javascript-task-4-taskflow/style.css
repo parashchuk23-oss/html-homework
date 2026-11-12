@@ -1,0 +1,34 @@
+:root { --ink:#12253e; --teal:#0d9488; --teal-dark:#0f766e; --border:#dce7e9; }
+* { box-sizing:border-box; }
+body { font-family:system-ui,-apple-system,"Segoe UI",sans-serif; background:#f3f8f8; color:var(--ink); }
+.app-header { background:white; border-bottom:1px solid var(--border); padding:16px 0; }
+.brand { font-size:25px; font-weight:850; letter-spacing:-1.2px; color:var(--ink); }
+.brand span:first-child { color:var(--teal); }
+.dot { color:#14b8a6; }
+.header-caption { font-size:10px; font-weight:750; color:#7a929a; letter-spacing:1.5px; text-align:right; }
+.eyebrow { font-size:11px; color:var(--teal); font-weight:800; letter-spacing:1.8px; }
+h1 { letter-spacing:-1.5px; }
+.app-card { border:1px solid var(--border); border-radius:22px; padding:28px; background:white; box-shadow:0 14px 42px rgba(21,56,67,.06); }
+.form-control { border-radius:12px; border-color:#cadae1; }
+.form-control:focus { border-color:var(--teal); box-shadow:0 0 0 .25rem rgba(13,148,136,.13); }
+.btn-add { background:var(--teal); border-color:var(--teal); color:white; border-radius:12px; font-weight:750; }
+.btn-add:hover, .btn-add:focus-visible { background:var(--teal-dark); border-color:var(--teal-dark); color:white; }
+.counter { border-radius:999px; padding:8px 12px; font-size:12px; font-weight:650; }
+.active-counter { color:#0d685e; background:#e3f6ef; }
+.done-counter { color:#425d70; background:#ecf1f5; }
+.empty-state { color:#728795; text-align:center; border:1px dashed #cbdde0; background:#fafdfd; border-radius:14px; padding:35px 18px; }
+.task-item { display:flex; align-items:center; gap:13px; padding:15px 3px; border-bottom:1px solid #edf2f3; }
+.task-item:last-child { border-bottom:0; }
+.task-checkbox { width:21px; height:21px; flex:0 0 21px; accent-color:var(--teal); cursor:pointer; }
+.task-text { min-width:0; flex:1; font-size:16px; overflow-wrap:anywhere; }
+.task-item.is-completed .task-text { text-decoration:line-through; color:#8797a1; }
+.btn-delete { border:1px solid #f2d0cf; background:#fff7f6; color:#b3322d; font-size:13px; font-weight:700; padding:8px 12px; border-radius:10px; flex-shrink:0; }
+.btn-delete:hover { background:#fbe9e7; border-color:#e4a4a0; }
+.btn-delete:focus-visible, .task-checkbox:focus-visible { outline:3px solid #7dd3c7; outline-offset:2px; }
+.footer-note { font-size:12px; color:#8aa0a5; }
+@media (max-width:575.98px) {
+ .app-card { padding:20px; border-radius:17px; }
+ .header-caption { font-size:9px; max-width:120px; }
+ .task-item { gap:10px; }
+ .btn-delete { padding:7px 10px; }
+}
