@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TaskFlow — навчальний список завдань з додаванням, виконанням і видаленням на чистому JavaScript.">
+  <title>TaskFlow — менеджер завдань</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="container d-flex justify-content-between align-items-center gap-3">
+      <a class="brand text-decoration-none" href="./">Task<span>Flow</span><span class="dot">.</span></a>
+      <span class="header-caption">НАВЧАЛЬНИЙ JAVASCRIPT ПРОЄКТ</span>
+    </div>
+  </header>
+
+  <main class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-9 col-xl-8">
+        <div class="mb-4">
+          <span class="eyebrow">ОРГАНІЗУЙ СВІЙ ДЕНЬ</span>
+          <h1 class="display-5 fw-bold mt-2 mb-2">Мої завдання<span class="dot">.</span></h1>
+          <p class="text-secondary">Додавай справи, позначай виконані та тримай прогрес під контролем.</p>
+        </div>
+
+        <section class="app-card mb-4" aria-labelledby="form-heading">
+          <h2 class="h5 fw-bold mb-3" id="form-heading">Нове завдання</h2>
+          <form id="task-form" novalidate>
+            <label for="task-input" class="form-label fw-semibold">Що потрібно зробити?</label>
+            <div class="row g-2 align-items-start">
+              <div class="col-sm">
+                <input id="task-input" class="form-control form-control-lg" type="text" placeholder="Наприклад, повторити JavaScript" maxlength="120" aria-describedby="task-error" required>
+                <div id="task-error" class="invalid-feedback">Введи назву завдання щонайменше з 3 символів.</div>
+              </div>
+              <div class="col-sm-auto d-grid">
+                <button class="btn btn-add btn-lg px-4" type="submit">+ Додати</button>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <section class="app-card" aria-labelledby="task-heading">
+          <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+            <h2 class="h5 fw-bold m-0" id="task-heading">Список завдань</h2>
+            <div class="d-flex flex-wrap gap-2" aria-live="polite">
+              <span class="counter active-counter">Активні: <strong id="active-count">0</strong></span>
+              <span class="counter done-counter">Виконані: <strong id="completed-count">0</strong></span>
+            </div>
+          </div>
+          <p id="empty-message" class="empty-state mb-0">Поки немає завдань. Додай перше за допомогою форми вище.</p>
+          <ul id="task-list" class="list-unstyled m-0" aria-label="Мої завдання"></ul>
+        </section>
+        <p class="text-center footer-note mt-4">Демонстрація state + renderTasks() · Без LocalStorage, React і сервера</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
