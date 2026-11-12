@@ -49,6 +49,10 @@ const resultGreeting = document.querySelector("#result-greeting");
 const resultScore = document.querySelector("#result-score");
 const resultMessage = document.querySelector("#result-message");
 const restartButton = document.querySelector("#restart-button");
+const summaryName = document.querySelector("#summary-name");
+const summaryCorrect = document.querySelector("#summary-correct");
+const summaryTotal = document.querySelector("#summary-total");
+const summaryTime = document.querySelector("#summary-time");
 
 // Змінні, які змінюватимуться під час гри.
 let playerName = "";
@@ -58,6 +62,7 @@ let score = 0;
 let secondsLeft = 60;
 let timerId = null;
 let quizFinished = false;
+const QUIZ_SECONDS = 60;
 
 // Вмикаємо лише потрібний екран. classList змінює класи CSS.
 function showScreen(screen) {
@@ -112,7 +117,9 @@ function showQuestion() {
 
 // Таймер один на всю вікторину, а не на кожне питання.
 function startTimer() {
+  // Перед запуском очищаємо старий інтервал.
   clearInterval(timerId);
+  timerId = null;
   timerText.textContent = secondsLeft;
 
   timerId = setInterval(() => {
@@ -134,6 +141,13 @@ function finishQuiz(timeIsUp) {
   quizFinished = true;
   clearInterval(timerId);
   timerId = null;
+
+  // Таблиця відображає тільки поточне проходження.
+  const elapsedSeconds = Math.max(0, Math.min(QUIZ_SECONDS, QUIZ_SECONDS - secondsLeft));
+  summaryName.textContent = playerName;
+  summaryCorrect.textContent = String(score);
+  summaryTotal.textContent = String(questions.length);
+  summaryTime.textContent = elapsedSeconds + " с";
 
   resultGreeting.textContent = playerName + ", твій результат:";
   resultScore.textContent = score + " / " + questions.length;
@@ -161,11 +175,14 @@ startForm.addEventListener("submit", (event) => {
     return;
   }
 
+  // Захист від дублювання інтервалів при будь-якому повторному старті.
+  clearInterval(timerId);
+  timerId = null;
   playerName = name;
   currentQuestion = 0;
   selectedAnswer = null;
   score = 0;
-  secondsLeft = 60;
+  secondsLeft = QUIZ_SECONDS;
   quizFinished = false;
   timerPill.classList.remove("timer-warning");
 
@@ -202,7 +219,7 @@ restartButton.addEventListener("click", () => {
   quizFinished = false;
   score = 0;
   currentQuestion = 0;
-  secondsLeft = 60;
+  secondsLeft = QUIZ_SECONDS;
   selectedAnswer = null;
   timerText.textContent = secondsLeft;
   timerPill.classList.remove("timer-warning");
