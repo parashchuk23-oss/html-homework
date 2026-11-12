@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Навчальна JavaScript-вікторина з п'яти запитань, таймером та підрахунком балів.">
+  <title>JavaScript Quiz — 5 питань за 60 секунд</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a href="./" class="brand text-decoration-none">JS<span>Quiz</span><span class="brand-dot">.</span></a>
+      <span class="topbar-label">НАВЧАЛЬНИЙ ПРОЄКТ</span>
+    </div>
+  </header>
+
+  <main class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-xl-7">
+        <div class="intro mb-4">
+          <span class="eyebrow">ПЕРЕВІР СВОЇ ЗНАННЯ</span>
+          <h1 class="display-5 fw-bold mt-2">JavaScript Quiz<span class="title-dot">.</span></h1>
+          <p class="text-secondary">П'ять запитань, три варіанти відповіді та одна хвилина. Готовий перевірити себе?</p>
+        </div>
+
+        <section id="start-screen" class="quiz-card" aria-labelledby="start-title">
+          <div class="step-icon" aria-hidden="true">01</div>
+          <h2 id="start-title" class="h4 fw-bold mb-2">Почнімо зі знайомства</h2>
+          <p class="text-secondary mb-4">Введи ім'я (щонайменше 3 символи), щоб почати тест.</p>
+          <form id="start-form" novalidate>
+            <label for="player-name" class="form-label fw-semibold">Твоє ім'я</label>
+            <input id="player-name" class="form-control form-control-lg" type="text" autocomplete="given-name" maxlength="40" placeholder="Наприклад, Ярослав" aria-describedby="name-error" required>
+            <div class="invalid-feedback" id="name-error">Введи ім'я щонайменше з 3 символів.</div>
+            <button class="btn btn-start btn-lg w-100 mt-4" type="submit">Почати вікторину <span aria-hidden="true">→</span></button>
+          </form>
+          <div class="d-flex flex-wrap gap-3 mt-4 small text-secondary">
+            <span>◷ 60 секунд</span><span>◇ 5 питань</span><span>✓ 1 бал за відповідь</span>
+          </div>
+        </section>
+
+        <section id="quiz-screen" class="quiz-card d-none" aria-labelledby="question-title">
+          <div class="d-flex justify-content-between align-items-center gap-3 mb-3">
+            <span id="question-counter" class="eyebrow">Питання 1 з 5</span>
+            <div class="timer-pill" id="timer-pill" aria-live="off">◷ <span id="timer">60</span> с</div>
+          </div>
+          <div class="progress mb-4" style="height: 8px" role="progressbar" aria-label="Прогрес вікторини" aria-valuemin="0" aria-valuemax="5" aria-valuenow="1" id="quiz-progress">
+            <div class="progress-bar" id="progress-bar" style="width: 20%"></div>
+          </div>
+          <h2 id="question-title" class="h4 fw-bold mb-4"></h2>
+          <div id="answers" class="d-grid gap-3" role="group" aria-label="Варіанти відповіді"></div>
+          <p id="answer-error" class="small text-danger mt-3 mb-0 d-none" role="alert">Спочатку вибери відповідь.</p>
+          <button type="button" id="next-button" class="btn btn-start btn-lg w-100 mt-4">Наступне питання <span aria-hidden="true">→</span></button>
+        </section>
+
+        <section id="result-screen" class="quiz-card text-center d-none" aria-labelledby="result-title">
+          <div class="result-icon mx-auto mb-3" aria-hidden="true">✓</div>
+          <span class="eyebrow">ТВОЇ РЕЗУЛЬТАТИ</span>
+          <h2 id="result-title" class="h3 fw-bold mt-2">Тест завершено!</h2>
+          <p id="result-greeting" class="text-secondary mb-1"></p>
+          <div id="result-score" class="score-display my-3" aria-live="polite"></div>
+          <p id="result-message" class="text-secondary"></p>
+          <button type="button" id="restart-button" class="btn btn-start btn-lg mt-3">Пройти ще раз <span aria-hidden="true">↻</span></button>
+        </section>
+
+        <p class="footer-note text-center mt-4">HTML5 · Bootstrap 5.3 · JavaScript · Без сервера та бази даних</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
