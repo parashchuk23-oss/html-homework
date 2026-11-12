@@ -2,9 +2,55 @@
 
 // STATE — джерело правди для інтерфейсу.
 // Кожен об'єкт завдання має id, text і completed.
-// Дані зберігаються тільки в пам'яті вкладки браузера.
+// Зберігаємо лише масив даних, без HTML чи DOM-елементів.
+const STORAGE_KEY = "taskflow-tasks";
 let tasks = [];
 let nextTaskId = 1;
+
+// Відновлюємо масив із LocalStorage. За відсутніх, пошкоджених або
+// некоректних даних починаємо з порожнього списку.
+function loadTasks() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved === null) return [];
+
+    const parsed = JSON.parse(saved);
+    if (!Array.isArray(parsed)) return [];
+
+    const ids = new Set();
+    const valid = parsed.every((task) => {
+      if (task === null || typeof task !== "object" || Array.isArray(task)) return false;
+      if (!Number.isSafeInteger(task.id) || task.id <= 0 || ids.has(task.id)) return false;
+      if (typeof task.text !== "string" || task.text.trim().length < 3) return false;
+      if (typeof task.completed !== "boolean") return false;
+      ids.add(task.id);
+      return true;
+    });
+
+    // У разі некоректної структури не переносимо її до інтерфейсу.
+    if (!valid) return [];
+
+    // Залишаємо тільки поля id, text, completed.
+    return parsed.map((task) => ({
+      id: task.id,
+      text: task.text,
+      completed: task.completed
+    }));
+  } catch (error) {
+    console.warn("Не вдалося відновити завдання з LocalStorage:", error);
+    return [];
+  }
+}
+
+// Викликається після кожної зміни tasks.
+function saveTasks() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+  } catch (error) {
+    // Наприклад, сховище заблоковане браузером або переповнене.
+    console.warn("Не вдалося зберегти завдання в LocalStorage:", error);
+  }
+}
 
 // Отримуємо DOM-елементи (один раз після завантаження HTML).
 const taskForm = document.querySelector("#task-form");
@@ -37,6 +83,7 @@ function renderTasks() {
 
     checkbox.addEventListener("change", () => {
       task.completed = checkbox.checked; // оновили state
+      saveTasks(); // зберегли дані в LocalStorage
       renderTasks(); // оновили інтерфейс
     });
 
@@ -54,6 +101,7 @@ function renderTasks() {
     deleteButton.addEventListener("click", () => {
       // filter створює новий масив без вибраного завдання.
       tasks = tasks.filter((currentTask) => currentTask.id !== task.id);
+      saveTasks();
       renderTasks();
     });
 
@@ -86,6 +134,7 @@ taskForm.addEventListener("submit", (event) => {
   // Додаємо новий об'єкт до стану. id не повторюється у межах сеансу.
   tasks.push({ id: nextTaskId, text: text, completed: false });
   nextTaskId++;
+  saveTasks();
 
   taskInput.value = "";
   taskInput.classList.remove("is-invalid");
@@ -98,5 +147,8 @@ taskInput.addEventListener("input", () => {
   taskInput.classList.remove("is-invalid");
 });
 
-// Перший рендер: список порожній, лічильники дорівнюють нулю.
+// Під час відкриття сторінки відновлюємо дані та показуємо їх.
+tasks = loadTasks();
+// Наступний id більший за всі збережені — без повторного використання id.
+nextTaskId = tasks.reduce((maxId, task) => Math.max(maxId, task.id), 0) + 1;
 renderTasks();
