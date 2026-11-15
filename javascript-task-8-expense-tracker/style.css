@@ -1,0 +1,32 @@
+:root{--ink:#17243c;--teal:#0d9488;--teal-dark:#0f766e;--border:#dce8e8}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:#f4f8f8}
+.topbar{padding:17px 0;background:#fff;border-bottom:1px solid var(--border)}
+.brand{text-decoration:none;color:var(--ink);font-size:24px;font-weight:850;letter-spacing:-1px}
+.brand span:first-child{color:var(--teal)}
+.brand-dot{color:#14b8a6}
+.topbar-label,.eyebrow{font-size:11px;letter-spacing:1.5px;font-weight:800;color:#6f8991}
+.eyebrow{color:var(--teal)}
+h1{letter-spacing:-1.6px}
+.total-card{border-radius:22px;padding:26px 30px;background:linear-gradient(125deg,#123f48,#126d69);color:white;box-shadow:0 12px 33px rgba(15,92,88,.14)}
+.total-label{font-size:11px;font-weight:800;letter-spacing:1.7px;color:#b4e8dc}
+.total-value{font-size:clamp(32px,6vw,49px);font-weight:850;letter-spacing:-1.4px}
+.total-note{font-size:13px;color:#c6ece5}
+.panel{background:white;border:1px solid var(--border);border-radius:22px;padding:27px;box-shadow:0 14px 43px rgba(32,64,72,.055)}
+.form-control,.form-select{border-color:#ccd9de;border-radius:11px;font-size:1rem}
+.form-control:focus,.form-select:focus{border-color:var(--teal);box-shadow:0 0 0 .25rem rgba(13,148,136,.12)}
+.btn-add{background:var(--teal);border:1px solid var(--teal);color:white;font-weight:750;border-radius:12px;padding:12px 20px}
+.btn-add:hover,.btn-add:focus-visible{color:white;background:var(--teal-dark);border-color:var(--teal-dark)}
+.count-pill{border-radius:999px;background:#e5f5f0;color:#0f6a60;padding:8px 13px;font-size:12px;font-weight:600;white-space:nowrap}
+.empty-state{border:1px dashed #cadcdd;background:#fafdfe;border-radius:13px;padding:33px 20px;text-align:center;color:#788d98}
+.expense-item{display:flex;align-items:center;gap:14px;justify-content:space-between;padding:16px 2px;border-bottom:1px solid #edf1f2}
+.expense-item:last-child{border-bottom:0}
+.expense-info{flex:1;min-width:0}
+.expense-name{font-weight:750;overflow-wrap:anywhere}
+.expense-category{font-size:12px;color:#66828b;display:inline-block;margin-top:4px}
+.expense-actions{display:flex;align-items:center;gap:13px;flex-shrink:0}
+.expense-price{white-space:nowrap;font-weight:800;color:#124e4a}
+.btn-delete{background:#fff7f7;color:#b12d2d;border:1px solid #f2d1d1;border-radius:9px;font-size:13px;font-weight:700;padding:7px 10px}
+.btn-delete:hover{background:#fce8e8}
+.footer-note{font-size:12px;color:#8aa0a4}
+@media(max-width:575.98px){.panel{padding:20px;border-radius:17px}.total-card{padding:22px}.topbar-label{font-size:9px;max-width:105px;text-align:right}.expense-actions{gap:9px}.expense-price{font-size:14px}}
