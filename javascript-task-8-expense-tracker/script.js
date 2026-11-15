@@ -16,6 +16,17 @@ const expenseList = document.querySelector("#expense-list");
 const emptyMessage = document.querySelector("#empty-message");
 const totalAmount = document.querySelector("#total-amount");
 const expenseCount = document.querySelector("#expense-count");
+const categoryFilter = document.querySelector("#category-filter");
+const searchInput = document.querySelector("#search-input");
+const clearAllButton = document.querySelector("#clear-all-button");
+
+// Підсумки за категоріями обчислюємо за повним масивом.
+const categoryTotals = {
+  "Їжа": document.querySelector("#total-food"),
+  "Транспорт": document.querySelector("#total-transport"),
+  "Покупки": document.querySelector("#total-shopping"),
+  "Інше": document.querySelector("#total-other")
+};
 
 // Форматуємо число як суму в гривнях.
 function formatMoney(value) {
@@ -74,8 +85,16 @@ function renderExpenses() {
   // Очищаємо попередній список, щоб елементи не дублювалися.
   expenseList.textContent = "";
 
-  // Для кожного об'єкта створюємо окремий пункт списку.
-  expenses.forEach((expense) => {
+  // Фільтр і пошук змінюють лише видимий список, не сам масив.
+  const selectedCategory = categoryFilter.value;
+  const query = searchInput.value.trim().toLocaleLowerCase("uk-UA");
+  const visibleExpenses = expenses.filter((expense) => {
+    const categoryMatches = selectedCategory === "Усі" || expense.category === selectedCategory;
+    const nameMatches = expense.name.toLocaleLowerCase("uk-UA").includes(query);
+    return categoryMatches && nameMatches;
+  });
+
+  visibleExpenses.forEach((expense) => {
     const item = document.createElement("li");
     item.className = "expense-item";
 
@@ -124,8 +143,20 @@ function renderExpenses() {
   );
 
   totalAmount.textContent = formatMoney(totalCents / 100);
-  expenseCount.textContent = String(expenses.length);
-  emptyMessage.classList.toggle("d-none", expenses.length > 0);
+  // Підсумки відображають ВСІ витрати, навіть якщо частину приховано.
+  CATEGORIES.forEach((category) => {
+    const cents = expenses
+      .filter((expense) => expense.category === category)
+      .reduce((sum, expense) => sum + Math.round(expense.amount * 100), 0);
+    categoryTotals[category].textContent = formatMoney(cents / 100);
+  });
+
+  expenseCount.textContent = String(visibleExpenses.length);
+  emptyMessage.textContent = expenses.length === 0
+    ? "Поки немає витрат. Додай перший запис у форму вище."
+    : "За цими параметрами нічого не знайдено.";
+  emptyMessage.classList.toggle("d-none", visibleExpenses.length > 0);
+  clearAllButton.disabled = expenses.length === 0;
 }
 
 // Подія submit: перевіряємо форму, додаємо витрату, зберігаємо й оновлюємо UI.
@@ -171,6 +202,23 @@ form.addEventListener("submit", (event) => {
 // При виправленні введених даних прибираємо підсвічування помилки.
 nameInput.addEventListener("input", () => nameInput.classList.remove("is-invalid"));
 amountInput.addEventListener("input", () => amountInput.classList.remove("is-invalid"));
+
+// Пошук і фільтрація лише перемальовують список.
+categoryFilter.addEventListener("change", renderExpenses);
+searchInput.addEventListener("input", renderExpenses);
+
+// Повне очищення вимагає явного підтвердження.
+clearAllButton.addEventListener("click", () => {
+  if (expenses.length === 0) return;
+
+  const confirmed = window.confirm("Видалити всі витрати? Цю дію не можна скасувати.");
+  if (!confirmed) return;
+
+  expenses = [];
+  nextId = 1;
+  saveExpenses(); // зберігаємо порожній масив у LocalStorage
+  renderExpenses(); // одразу оновлюємо список та статистику
+});
 
 // Під час запуску відновлюємо дані та перемальовуємо інтерфейс.
 expenses = loadExpenses();
