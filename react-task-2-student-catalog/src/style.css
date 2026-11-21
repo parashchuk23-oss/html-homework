@@ -61,3 +61,14 @@ h2 { margin: 0; color: #1c3144; font-size: 26px; letter-spacing: -.65px; }
 @media(max-width:650px) { .main-content { padding-top: 46px; } .intro { margin-bottom: 43px; } .students-grid { grid-template-columns: 1fr; } .attendance-panel { padding: 25px; } .counter-area { width: 100%; justify-content: space-between; } .topbar-label { max-width: 140px; font-size: 9px; } }
 @media(max-width:400px) { .container { width: min(1120px, calc(100% - 28px)); } .counter-area { align-items: stretch; gap: 10px; } .counter-actions { min-width: 0; flex: 1; } .counter-value { min-width: 78px; justify-content: center; } .counter-value span { font-size: 48px; } }
 @media(prefers-reduced-motion:reduce) { .button { transition: none; } }
+
+/* Завдання 3 — перемикач, фільтр і лічильник видимих студентів */
+.catalog-controls { display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:15px; padding:19px; background:#fff; border:1px solid #e0eaea; border-radius:17px; margin-bottom:20px; }
+.filter-field { display:flex; flex-direction:column; gap:8px; min-width:210px; flex:1; max-width:380px; }
+.filter-field label { font-size:13px; color:#4d6975; font-weight:750; }
+.filter-field select { width:100%; appearance:auto; padding:11px 13px; font:inherit; color:#203d4c; background:#f9fcfc; border:1px solid #d3e1e2; border-radius:10px; }
+.toggle-button { border-radius:11px; border:1px solid #148b7e; background:#e7f6f1; color:#126d60; padding:12px 17px; font:inherit; font-size:13px; font-weight:750; cursor:pointer; }
+.toggle-button:hover { background:#d4efe6; }
+.filter-field select:focus-visible,.toggle-button:focus-visible { outline:3px solid #68cbb8; outline-offset:2px; }
+.empty-students { padding:25px; text-align:center; background:#fff; border:1px dashed #cadcdd; border-radius:16px; color:#657d8b; margin:0 0 20px; }
+@media(max-width:650px) { .catalog-controls { align-items:stretch; } .filter-field { min-width:0; max-width:none; } .toggle-button { width:100%; } .section-heading { align-items:center; } }
