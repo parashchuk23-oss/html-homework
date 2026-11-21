@@ -1,0 +1,20 @@
+:root { --ink:#16293d; --teal:#0d9488; --teal-dark:#0f766e; --border:#dce8ea; }
+* { box-sizing:border-box; }
+body { background:#f4f8fa; color:var(--ink); font-family:system-ui,-apple-system,"Segoe UI",sans-serif; }
+.site-header { padding:16px 0; background:#fff; border-bottom:1px solid var(--border); }
+.brand { color:var(--ink); font-size:25px; font-weight:850; letter-spacing:-1px; }
+.brand span:first-child,.brand-dot { color:var(--teal); }
+.header-label { font-size:10px; color:#7a8f9d; font-weight:800; letter-spacing:1.5px; text-align:right; }
+.eyebrow { color:var(--teal); font-size:11px; font-weight:800; letter-spacing:1.9px; }
+.intro h1 { letter-spacing:-1.5px; }
+.fact-card { background:white; border:1px solid var(--border); border-radius:24px; padding:35px; box-shadow:0 18px 50px rgba(28,55,77,.07); }
+.fact-symbol { display:grid; place-items:center; background:#e4f7f1; color:var(--teal-dark); width:56px; height:56px; border-radius:17px; font-size:28px; margin-bottom:24px; }
+.fact-content { border-radius:16px; background:#f1f8f8; padding:27px; min-height:145px; display:flex; align-items:center; border:1px solid #dceeea; }
+.fact-text { font-size:clamp(18px,3vw,23px); line-height:1.55; font-weight:550; overflow-wrap:anywhere; }
+.btn-fact { background:var(--teal); border:1px solid var(--teal); color:#fff; border-radius:12px; padding:13px; font-weight:750; }
+.btn-fact:hover,.btn-fact:focus-visible { color:#fff; background:var(--teal-dark); border-color:var(--teal-dark); }
+.btn-fact:disabled { color:#fff; background:#72aaa4; border-color:#72aaa4; }
+.loading-message { color:var(--teal-dark); font-weight:650; }
+.footer-note { font-size:12px; color:#7d939b; }
+.footer-note a { color:var(--teal-dark); }
+@media(max-width:575.98px) { .fact-card { padding:23px; border-radius:18px; } .fact-content { padding:19px; } .header-label { font-size:9px; max-width:130px; } }
