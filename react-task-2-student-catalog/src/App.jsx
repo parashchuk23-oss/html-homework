@@ -1,3 +1,4 @@
+import { useState } from "react";
 import StudentCard from "./components/StudentCard.jsx";
 import Counter from "./components/Counter.jsx";
 
@@ -10,6 +11,21 @@ const students = [
 ];
 
 function App() {
+  // Два незалежні стани: видимість списку й обраний курс.
+  const [showStudents, setShowStudents] = useState(true);
+  const [selectedCourse, setSelectedCourse] = useState("all");
+
+  // Список курсів отримуємо з даних, щоб не дублювати назви вручну.
+  const courses = [...new Set(students.map((student) => student.course))];
+
+  // Фільтр не змінює вихідний масив students.
+  const filteredStudents = students.filter(
+    (student) => selectedCourse === "all" || student.course === selectedCourse
+  );
+
+  // Якщо список прихований, видимих карток рівно нуль.
+  const visibleStudents = showStudents ? filteredStudents : [];
+
   return (
     <div className="site">
       <header className="site-header">
@@ -32,11 +48,43 @@ function App() {
               <p className="section-kicker">КАТАЛОГ</p>
               <h2 id="students-heading">Наші студенти</h2>
             </div>
-            <span className="student-count">{students.length} студенти</span>
+            <span className="student-count" aria-live="polite">Показано: {visibleStudents.length} з {students.length}</span>
           </div>
 
-          <div className="students-grid">
-            {students.map((student) => (
+          <div className="catalog-controls">
+            <div className="filter-field">
+              <label htmlFor="course-filter">Фільтр за курсом</label>
+              <select
+                id="course-filter"
+                value={selectedCourse}
+                onChange={(event) => setSelectedCourse(event.target.value)}
+              >
+                <option value="all">Усі курси</option>
+                {courses.map((course) => (
+                  <option key={course} value={course}>{course}</option>
+                ))}
+              </select>
+            </div>
+            <button
+              type="button"
+              className="toggle-button"
+              onClick={() => setShowStudents((current) => !current)}
+              aria-expanded={showStudents}
+              aria-controls="students-list"
+            >
+              {showStudents ? "Приховати студентів" : "Показати студентів"}
+            </button>
+          </div>
+
+          {showStudents && visibleStudents.length === 0 && (
+            <p className="empty-students">За обраним курсом студентів не знайдено.</p>
+          )}
+          {!showStudents && (
+            <p className="empty-students">Список студентів приховано. Натисни «Показати студентів».</p>
+          )}
+
+          <div className="students-grid" id="students-list">
+            {visibleStudents.map((student) => (
               <StudentCard
                 key={student.id}
                 name={student.name}
