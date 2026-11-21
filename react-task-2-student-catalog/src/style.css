@@ -1,0 +1,63 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #1c3144;
+  background: #f5f8f8;
+  font-synthesis: none;
+}
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button { font: inherit; }
+.site { min-height: 100vh; }
+.container { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+.site-header { background: #fff; border-bottom: 1px solid #e0e9e9; }
+.topbar { min-height: 78px; display: flex; gap: 24px; align-items: center; justify-content: space-between; }
+.logo { text-decoration: none; color: #1b3344; font-size: 27px; font-weight: 850; letter-spacing: -1.5px; }
+.logo span, .logo b { color: #118c7e; }
+.topbar-label { color: #7c929c; font-size: 11px; letter-spacing: 1.2px; font-weight: 750; text-align: right; }
+.main-content { padding-top: 74px; }
+.intro { max-width: 770px; margin-bottom: 64px; }
+.eyebrow, .section-kicker { color: #158576; font-size: 11px; font-weight: 850; letter-spacing: 2px; }
+.eyebrow { display: flex; align-items: center; gap: 9px; }
+.eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: #16a08d; }
+h1 { margin: 17px 0 19px; font-size: clamp(38px, 6vw, 64px); line-height: 1.1; letter-spacing: -2.8px; font-weight: 850; }
+h1 span { color: #148e81; }
+.intro-description { color: #657d8b; font-size: 17px; line-height: 1.7; margin: 0; }
+.section-heading { display: flex; justify-content: space-between; gap: 16px; align-items: flex-end; margin-bottom: 23px; }
+.section-kicker { margin: 0 0 8px; }
+h2 { margin: 0; color: #1c3144; font-size: 26px; letter-spacing: -.65px; }
+.student-count { border-radius: 999px; white-space: nowrap; background: #e3f4ed; color: #187363; padding: 9px 15px; font-size: 13px; font-weight: 750; }
+.students-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.student-card { display: flex; min-height: 182px; align-items: flex-start; gap: 20px; padding: 26px; border: 1px solid #e0eaea; border-radius: 20px; background: #fff; box-shadow: 0 12px 30px rgba(20, 60, 70, .035); }
+.student-avatar { flex: 0 0 62px; display: grid; place-items: center; width: 62px; height: 62px; border-radius: 18px; font-size: 19px; font-weight: 850; }
+.avatar-mint { background: #dcf6ed; color: #147b65; }
+.avatar-blue { background: #e1efff; color: #316fba; }
+.avatar-peach { background: #fff0e4; color: #ae6b40; }
+.avatar-lilac { background: #eee9ff; color: #6d5ca7; }
+.student-info { min-width: 0; width: 100%; }
+.student-info h3 { font-size: 19px; margin: 1px 0 9px; letter-spacing: -.3px; }
+.student-meta { margin: 0 0 17px; color: #6b818c; font-size: 14px; }
+.student-meta strong { color: #29485b; }
+.student-course { border-top: 1px solid #edf1f1; padding-top: 13px; display: flex; flex-direction: column; gap: 5px; }
+.course-label { font-size: 10px; letter-spacing: 1.2px; font-weight: 800; color: #7d929c; }
+.course-name { color: #147b6d; font-weight: 750; font-size: 14px; }
+.attendance-panel { margin-top: 52px; background: linear-gradient(115deg,#14494b,#126e67); border-radius: 24px; padding: 34px; display: flex; align-items: center; justify-content: space-between; gap: 30px; color: white; }
+.attendance-copy { max-width: 420px; }
+.attendance-copy .section-kicker { color: #a2f0da; }
+.attendance-copy h2 { color: white; margin: 0 0 12px; }
+.attendance-copy p { margin: 0; color: #c2e6e2; line-height: 1.6; font-size: 14px; }
+.counter-area { display: flex; gap: 22px; align-items: center; }
+.counter-value { display: flex; flex-direction: column; align-items: center; min-width: 95px; }
+.counter-value span { font-size: 58px; line-height: 1; font-weight: 850; font-variant-numeric: tabular-nums; }
+.counter-value small { font-size: 11px; margin-top: 9px; color: #b9e4dc; }
+.counter-actions { display: flex; flex-direction: column; gap: 9px; min-width: 190px; }
+.button { border-radius: 11px; padding: 12px 15px; font-weight: 750; font-size: 13px; cursor: pointer; transition: transform .15s, background .15s; }
+.button:focus-visible { outline: 3px solid #a5efe1; outline-offset: 3px; }
+.button-primary { background: #fff; color: #17685f; border: 1px solid white; }
+.button-primary:hover { background: #e5f9f1; }
+.button-outline { color: #fff; background: transparent; border: 1px solid #83b7b2; }
+.button-outline:hover { background: #ffffff20; }
+.footer { font-size: 12px; color: #8ca2ab; text-align: center; padding: 37px 0; }
+@media(max-width:850px) { .student-card { padding: 21px; gap: 14px; } .student-avatar { width: 52px; height: 52px; flex-basis: 52px; } .attendance-panel { flex-wrap: wrap; } }
+@media(max-width:650px) { .main-content { padding-top: 46px; } .intro { margin-bottom: 43px; } .students-grid { grid-template-columns: 1fr; } .attendance-panel { padding: 25px; } .counter-area { width: 100%; justify-content: space-between; } .topbar-label { max-width: 140px; font-size: 9px; } }
+@media(max-width:400px) { .container { width: min(1120px, calc(100% - 28px)); } .counter-area { align-items: stretch; gap: 10px; } .counter-actions { min-width: 0; flex: 1; } .counter-value { min-width: 78px; justify-content: center; } .counter-value span { font-size: 48px; } }
+@media(prefers-reduced-motion:reduce) { .button { transition: none; } }
