@@ -10,6 +10,7 @@ const categories: ProductCategory[] = ["Електроніка", "Дім", "Сп
 export default function Catalog() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<ProductCategory | "Усі">("Усі");
+  const [sortOrder, setSortOrder] = useState<"default" | "price-asc" | "price-desc">("default");
 
   // Спочатку шукаємо в назві, потім застосовуємо фільтр категорій.
   // Початковий масив products залишається незмінним.
@@ -18,6 +19,12 @@ export default function Catalog() {
       .includes(search.trim().toLocaleLowerCase("uk-UA"));
     const matchesCategory = category === "Усі" || product.category === category;
     return matchesName && matchesCategory;
+  });
+
+  const sortedProducts = [...visibleProducts].sort((a, b) => {
+    if (sortOrder === "price-asc") return a.price - b.price;
+    if (sortOrder === "price-desc") return b.price - a.price;
+    return 0;
   });
 
   return (
@@ -47,6 +54,18 @@ export default function Catalog() {
             {categories.map((item) => <option key={item} value={item}>{item}</option>)}
           </select>
         </div>
+        <div className="category-group">
+          <label htmlFor="sort-order">Сортувати за ціною</label>
+          <select
+            id="sort-order"
+            value={sortOrder}
+            onChange={(event) => setSortOrder(event.target.value as "default" | "price-asc" | "price-desc")}
+          >
+            <option value="default">За замовчуванням</option>
+            <option value="price-asc">Від дешевих до дорогих</option>
+            <option value="price-desc">Від дорогих до дешевих</option>
+          </select>
+        </div>
       </section>
 
       <section className="catalog-section" aria-labelledby="catalog-heading">
@@ -60,7 +79,7 @@ export default function Catalog() {
 
         {visibleProducts.length > 0 ? (
           <div className="products-grid">
-            {visibleProducts.map((product) => (
+            {sortedProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
