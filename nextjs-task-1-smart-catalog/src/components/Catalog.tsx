@@ -74,7 +74,7 @@ export default function Catalog() {
             <p className="eyebrow">НАША ДОБІРКА</p>
             <h2 id="catalog-heading">Каталог товарів</h2>
           </div>
-          <span className="items-count" aria-live="polite">Знайдено: {visibleProducts.length}</span>
+          <span className="items-count" aria-live="polite" role="status">Знайдено {visibleProducts.length} із {products.length} товарів</span>
         </div>
 
         {visibleProducts.length > 0 ? (
