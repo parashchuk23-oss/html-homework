@@ -17,6 +17,9 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="product-visual" aria-hidden="true">
         <span>{product.emoji}</span>
       </div>
+      {product.originalPrice !== undefined && product.originalPrice > product.price && (
+        <span className="sale-badge">Акція</span>
+      )}
       <div className="product-body">
         <div className="product-topline">
           <span className="category-tag">{product.category}</span>
@@ -27,7 +30,12 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
         <h3>{product.name}</h3>
         <p className="product-description">{product.description}</p>
-        <p className="product-price">{priceFormatter.format(product.price)}</p>
+        <div className="price-row">
+          <p className="product-price">{priceFormatter.format(product.price)}</p>
+          {product.originalPrice !== undefined && product.originalPrice > product.price && (
+            <del className="old-price">{priceFormatter.format(product.originalPrice)}</del>
+          )}
+        </div>
       </div>
     </article>
   );

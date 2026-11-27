@@ -5,6 +5,7 @@ export interface Product {
   id: number;
   name: string;
   price: number;
+  originalPrice?: number; // Стара ціна, якщо товар зі знижкою
   category: ProductCategory;
   inStock: boolean;
   emoji: string;
